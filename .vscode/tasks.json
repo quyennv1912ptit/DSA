@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build and Run with Input/Output",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-Command",
+        "g++ ${file} -o ${fileBasenameNoExtension}.exe && Get-Content input.txt | .\\${fileBasenameNoExtension}.exe | Out-File output.txt"
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
