@@ -4,15 +4,31 @@
     {
       "label": "Build and Run with Input/Output",
       "type": "shell",
-      "command": "pwsh",
-      "args": [
-        "-Command",
-        "g++ ${file} -o ${fileBasenameNoExtension}.exe && Get-Content input.txt | .\\${fileBasenameNoExtension}.exe | Out-File output.txt"
-      ],
       "problemMatcher": [],
       "group": {
         "kind": "build",
         "isDefault": true
+      },
+      "windows": {
+        "command": "pwsh",
+        "args": [
+          "-Command",
+          "g++ \"${file}\" -o \"${fileBasenameNoExtension}.exe\" && Get-Content input.txt | .\\\"${fileBasenameNoExtension}.exe\" | Out-File output.txt && Remove-Item \"${fileBasenameNoExtension}.exe\""
+        ]
+      },
+      "linux": {
+        "command": "bash",
+        "args": [
+          "-c",
+          "g++ \"${file}\" -o \"${fileBasenameNoExtension}\" && ./\"${fileBasenameNoExtension}\" < input.txt > output.txt && rm \"${fileBasenameNoExtension}\""
+        ]
+      },
+      "osx": {
+        "command": "bash",
+        "args": [
+          "-c",
+          "g++ \"${file}\" -o \"${fileBasenameNoExtension}\" && ./\"${fileBasenameNoExtension}\" < input.txt > output.txt && rm \"${fileBasenameNoExtension}\""
+        ]
       }
     }
   ]
